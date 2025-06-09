@@ -9,6 +9,7 @@
 
 #define SNIPETS_STORE_PATH "$(HOME)/.mysnippets/"
 
+// mysnippets commands enum
 enum MYS_COMMAND {
     MYS_ERROR,
     MYS_SAVE_COMMAND,
@@ -21,6 +22,7 @@ void mys_usage(const char *file)
     fprintf(stdout, "Usage: %s <command>\n", file);
 }
 
+// Get the provided command and check for its args.
 int get_check_command(int argc, const char **argv)
 {
     const char *command = argv[1];
@@ -31,7 +33,6 @@ int get_check_command(int argc, const char **argv)
             fprintf(stderr, "ERROR: Please provide a valid file and snippet\n\t%s save <file> '<snippet>'\n", argv[0]);
             return MYS_ERROR;
         }
-
         return MYS_SAVE_COMMAND;
     }
     else if (strcmp(command, "get") == 0)
@@ -168,6 +169,7 @@ int mys_command_save(const char *file, const char *snippet)
     return 0;
 }
 
+// Get a snippet.
 int mys_command_get(const char *file)
 {
     char *save_path = get_mys_save_file_path(file);
